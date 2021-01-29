@@ -21,9 +21,9 @@ class ApplicationController < Sinatra::Base
     redirect "/posts"
   end
 
-  private 
+  private
 
-  def current_user 
+  def current_user
     User.find_by_id(session[:id])
   end
 
@@ -37,5 +37,6 @@ class ApplicationController < Sinatra::Base
       redirect request.referrer || "/login"
     end
   end
+
 
 end
