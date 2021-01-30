@@ -2,3 +2,11 @@
 <% @posts.each do |post| %>
 <p><a href="/posts/<%= post.id %>"><%= post.title %></a></p>
 <% end %>
+
+<input id="search" name="search" placeholder="Enter search term..." type="text" />
+
+<form action="/search" method="get" accept-charset="UTF-8" >
+  <label for="query">Search for:</label>
+  <input id="query" name="query" type="text" />
+  <input name="commit" type="submit" value="Search" data-disable-with="Search" />
+</form>

@@ -3,9 +3,11 @@ class PostsController < ApplicationController
   # GET: /posts -> index
   get "/posts" do
     @posts = Post.all
+    @posts = Post.find_by(name: params[:title])
+
     erb :"/posts/index.html"
   end
-
+end
   # GET: /posts/new -> new
   get "/posts/new" do
     redirect_if_not_logged_in
@@ -44,7 +46,7 @@ class PostsController < ApplicationController
     if @post.update(title: params[:post][:title], content: params[:post][:content])
       flash[:success] = "Post successfully updated"
       redirect "/posts/#{@post.id}"
-    else 
+    else
       erb :"/posts/edit.html"
     end
   end
@@ -57,9 +59,9 @@ class PostsController < ApplicationController
     redirect "/posts"
   end
 
-  private 
+  private
 
-  def set_post 
+  def set_post
     @post = Post.find_by_id(params[:id])
     if @post.nil?
       flash[:error] = "Couldn't find a Post with id: #{params[:id]}"
